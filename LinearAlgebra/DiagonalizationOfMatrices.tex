@@ -9,6 +9,7 @@
 \usepackage{makecell}
 \usepackage{mathtools}
 \usepackage{siunitx}
+\usepackage{parallel}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -51,36 +52,59 @@
     \newpage
     \setcounter{section}{-1}
     \section{Preliminaries}
+
+    \subsection{Vector Set vs Vector Space}
+    We use different notations on vector sets and vector spaces: 
+    \begin{alignat*}{2}
+        \textbf{ sets } &
+            & \textbf{ spaces } & \\[1em]
+        \mathbb{R}^n&: \text{ the set of all real vectors } 
+            & \myvecsp{V}&: \text{ the whole real vector space } \\
+        \myset{B} = \mathbb{R}^n&: \text{ set B is the entire vector space } 
+            & \myset{C} = \myvecsp{V}&: \text{ (same) set C is the entire vector space } \\
+        \myset{B} \subset \mathbb{R}^n&: \text{ set B is a proper subset of }\mathbb{R}^n
+            & \myset{C} < \myvecsp{V}&: \text{ set C is a proper subspace of }\myvecsp{V} \\
+        \myset{B} \subseteq \mathbb{R}^n&: \text{ set B is a set of real vectors } 
+            & \myset{C} \le \myvecsp{V}&: \text{ set C is a vector space } \\
+        \myset{B} \nsubseteq \mathbb{R}^n&: \text{ set B contains non-real vectors } 
+            & \myset{C} \not\le \myvecsp{V}&: \text{ set C is a not a vector space } \\
+        \myset{B} \subset \myset{P}&: \text{ set B is proper subset of set P}
+            & \myset{C} < \mysubvecsp{U}&: \text{ set C is a space and is proper subspace of U } \\
+        \myset{B} \subseteq \myset{P}&: \text{ set B is subset of set P} 
+            & \myset{C} \le \mysubvecsp{U}&: \text{ set C is a space and is subspace of U } \\
+        \myset{B} \nsubseteq \myset{P}&: \text{ set B is not a subset of set P} 
+            & \myset{C} \not\le \mysubvecsp{U}&: \text{ set or space C is not a subspace of U } \\
+        \myset{B} \subset \mysubvecsp{U}&: \text{ set B is proper subset of space U} 
+            & & \\
+        \myset{B} \subseteq \mysubvecsp{U}&: \text{ set B is subset of space U} 
+            & & \\
+        \myset{B} \nsubseteq \mysubvecsp{U}&: \text{ set B is not a subset of space U} 
+            & & \\
+    \end{alignat*}
+
     \subsection{The Scalar Field}
     Unless otherwise specified:
     \begin{itemize}
         \item All matrices in this notes are real matrices
         \item All vectors are real
-        \item All vector spaces are $\subseteq \mathbb{R}^n$
-    \end{itemize}
-
-    \subsection{Coordinate Spaces}
-    We distinguish between an abstract subspace $V$ and the entire $n$-dimensional coordinate universe:
-    \begin{itemize}
-        \item $\mathbb{R}^n$ represents the \textbf{entire vector space} (the domain and codomain of our transformations).
-        \item $\mysubvecsp{V}, \mysubvecsp{E}, \dots$ is used to denote an arbitrary subspace or a solution set (such as an eigenspace) within $\mathbb{R}^n$.
+        \item All vector sets are $\subseteq \mathbb{R}^n$ ($\implies$ All vector spaces are $\le \myvecsp{V}$)
     \end{itemize}
 
     \newpage
     \section{Change of Basis}
     \subsection*{Quick Review: From Axioms to Coordinates}
-    Let $\mysubvecsp{V}$ be a vector space and $\myset{B}$ be any basis for $\mysubvecsp{V}$
+    Let $\mysubvecsp{U}$ be a vector space and $\myset{B}$ be any basis for $\mysubvecsp{U}$
     \begin{itemize}
-        \item \textbf{Basis Uniqueness:} For any $\myvec{v} \in \mysubvecsp{V}$, the coordinate vector $[\myvec{v}]_\myset{B}$ is unique.
-        \item \textbf{Origin Invariance:} All coordinate systems in $\mysubvecsp{V}$ share the same $\myvec{0}$ vector.
+        \item \textbf{Basis Uniqueness:} For any $\myvec{v} \in \mysubvecsp{U}$, the coordinate vector $[\myvec{v}]_\myset{B}$ is unique.
+        \item \textbf{Origin Invariance:} All coordinate systems in $\mysubvecsp{U}$ share the same $\myvec{0}$ vector.
         \item \textbf{Linearity:} The transition between $[\myvec{v}]_{\mathcal{B}_1}$ and $[\myvec{v}]_{\mathcal{B}_2}$ is a \textit{linear transformation}.
     \end{itemize}
     \subsection{Core Requirement: Shared Vector Space}
-    For the change of basis $[x]_\myset{B} \to [x]_\myset{C}$ to be valid, both sets must be bases for the \textbf{same underlying vector space} $\mysubvecsp{V}$.
+    For the change of basis $[x]_\myset{B} \to [x]_\myset{C}$ to be valid, both sets must be bases for the \textbf{same underlying vector space} $\mysubvecsp{U}$.
     \begin{equation}
-        \myset{B}, \myset{C} \subset \mysubvecsp{V} \quad \text{and} \quad \operatorname{Span}(\myset{B}) = \operatorname{Span}(\myset{C}) = \mysubvecsp{V}
+        \myset{B}, \myset{C} \subset \mysubvecsp{U} \quad \text{and} \quad \operatorname{Span}(\myset{B}) = \operatorname{Span}(\myset{C}) = \mysubvecsp{U}
     \end{equation}
-    This ensures that every vector $\myvec{v} \in \mysubvecsp{V}$ has a unique representation in both coordinate systems.
+    This ensures that every vector $\myvec{u} \in \mysubvecsp{U}$ has a unique representation in both coordinate systems.
     \subsection{The Transition Matrix}
     Since change of basis is a linear transformation, it can be expressed using a matrix
     \begin{quote}
@@ -112,9 +136,9 @@
         \myvec{v} = [\myvec{v}]_{\myset{S}} = \mymat{P}_{\myset{S}\leftarrow\myset{B}} \, [\myvec{v}]_{\myset{B}}
     \end{equation}
         
-    \subsubsection{General Formula for Transiting in Two Basis}
+    \subsubsection{General Formula for Transiting in Two Bases}
 
-    Let $\myset{B} = \{\myvec{b}_1, \dots, \myvec{b}_n\}$ and $\myset{C}$ be two bases for $\mysubvecsp{V}$.
+    Let $\myset{B} = \{\myvec{b}_1, \dots, \myvec{b}_n\}$ and $\myset{C}$ be two bases for $\mysubvecsp{U}$.
     To find the coordinate vector $[\myvec{v}]_{\myset{C}}$ from $[\myvec{v}]_{\myset{B}}$, we use the transition matrix $\mymat{P}_{\myset{C} \leftarrow \myset{B}}$:
 
     \begin{equation}
@@ -173,7 +197,7 @@
 
     \subsubsection{General Formula}
     For any linear transformation $[\mymat{L}]_{\myset{B}}$ in basis $\myset{B}$, \\
-    the same transformation that applicable on vectors in basis $\myset{C}$, $[\mymat{L}]_{\myset{C}}$, is given by
+    that is applicable to vectors in basis $\myset{C}$, $[\mymat{L}]_{\myset{C}}$, is given by
     \begin{equation}
         [\mymat{L}]_{\myset{C}} = \mymat{P}_{\myset{C}\leftarrow\myset{B}} \cdot [\mymat{L}]_{\myset{B}} \cdot \mymat{P}_{\myset{B}\leftarrow\myset{C}}
     \end{equation}
@@ -184,7 +208,7 @@
     \subsection{Definitions}
     \subsubsection{Eigenvectors and Eigenvalues}
     \textbf{Eigenvector} (or characteristic vector) is a non-zero vector that \\
-    has its direction un\large \textbf{changed} (or reversed, or shrunk into a point) in a linear transformation
+    has its \textbf{direction unchanged} (or reversed, or shrunk into a point) in a linear transformation
     \vspace{\belowdisplayshortskip}
 
     More precisely, an eigenvector $\myvec{v}$ of a linear transformation $\mymat{A}$ is scaled by a constant factor $\lambda$ when the linear transformation is applied to it
@@ -214,7 +238,8 @@
     \noindent \rule{\textwidth}{0.1pt} 
 
     \subsubsection{Eigenspace}
-    For a given eigenvalue $\lambda_k$, the \textbf{eigenspace} $\mysubvecsp{E}_{\lambda_k}$ is a vector space, it is the set of all eigenvectors corresponding to $\lambda_k$, plus the zero vector.
+    For a given eigenvalue $\lambda_k$, the \textbf{eigenspace} $\mysubvecsp{E}_{\lambda_k} \le \myvecsp{V}$, \\
+    is the set of all eigenvectors corresponding to $\lambda_k$, plus the zero vector.
     \begin{equation}
         \mysubvecsp{E}_{\lambda_k} = \{ \myvec{v} \mid \mymat{A}\myvec{v} = \lambda_k\myvec{v} \} = \operatorname{null}(\mymat{A}-\lambda_k \mymat{I})
     \end{equation}
@@ -267,7 +292,7 @@
         \item \textbf{Dimension of Eigenspaces:} \vspace{1ex} \\
             Let $m$ be the number of \textbf{distinct real} eigenvalues $\lambda_1, \dots, \lambda_m$ with corresponding eigenspaces $\mysubvecsp{E}_{\lambda_1}, \dots, \mysubvecsp{E}_{\lambda_m}$.
             \begin{itemize}
-                \item \textbf{Real:} $\mysubvecsp{E}_{\lambda_k} \subset \mathbb{R}^n$ for all real $\lambda_k$.
+                \item \textbf{Real:} $\mysubvecsp{E}_{\lambda_k} \le \myvecsp{V}$ for all real $\lambda_k$.
                 \item \textbf{Disjointness:} Eigenspaces only intersect at the zero vector:
                 \begin{equation}
                     \mysubvecsp{E}_{\lambda_i} \cap \mysubvecsp{E}_{\lambda_j} = \{\myvec{0}\} \quad \forall\,i \ne j
@@ -289,7 +314,7 @@
     \subsubsection{Eigenvalue of Inverse Matrix}
     If $\mymat{A}^{-1}$ exists, the eigenvalues of $\mymat{A}^{-1}$ are the reciprocal of eigenvalues of $\mymat{A}$\\
     
-    derivation: Assume $\mymat{A}$ is invertable, let $\lambda$ and $\lambda'$ be the eigenvalues of $\mymat{A}$ and $\mymat{A}^{-1}$ respectively\\
+    derivation: Assume $\mymat{A}$ is invertible, let $\lambda$ and $\lambda'$ be the eigenvalues of $\mymat{A}$ and $\mymat{A}^{-1}$ respectively\\
     Note that $\lambda \ne 0$ is always true when $\mymat{A}$ is invertible (think of the characteristic equation)
     \begin{align*}
         \mymat{A}\myvec{v} &= \lambda\myvec{v} \\
@@ -367,7 +392,7 @@
     \subsection{Diagonalizable Matrices}
     For a $n \times n$ square matrix $\mymat{A}$ that has $m$ distinct eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_m$ to be \textbf{diagonalizable}, the total dimension of its eigenspaces spans the entire vector space
     \begin{equation}
-        \mymat{E}_{\lambda_1} \oplus \mymat{E}_{\lambda_2} \oplus \dots \oplus \mymat{E}_{\lambda_m} = \mathbb{R}^n
+        \mysubvecsp{E}_{\lambda_1} \oplus \mysubvecsp{E}_{\lambda_2} \oplus \dots \oplus \mysubvecsp{E}_{\lambda_m} = \mathbb{R}^n
     \end{equation}
     In practical calculation, this means the sum of the \textbf{geometric multiplicities} must equal the order of the matrix:
     \begin{equation}
@@ -488,34 +513,34 @@
     An orthonormal set of vectors is basically intersecting the concept of orthogonal set and normalization of vectors
     \vspace{1ex}
 
-    A set of vectors $\myset{W} = \{\myvec{w}_1, \myvec{w}_2, \dots, \myvec{w}_m\}$ is an \textbf{orthonormal set} \\
+    A set of vectors $\myset{P} = \{\myvec{p}_1, \myvec{p}_2, \dots, \myvec{p}_m\}$ is an \textbf{orthonormal set} \\
     if \textbf{all} the following requirements are satisfied
     \begin{itemize}
-        \item $\myset{W}$ is orthogonal set
+        \item $\myset{P}$ is orthogonal set
         \begin{itemize}
-            \item $\dotprod{\myvec{w}_i}{\myvec{w}_j} = 0 \quad \forall\,i, j \in \{1, \dots, m\} \text{ with } i \neq j$
+            \item $\dotprod{\myvec{p}_i}{\myvec{p}_j} = 0 \quad \forall\,i, j \in \{1, \dots, m\} \text{ with } i \neq j$
         \end{itemize}
-        \item $\|\myvec{w}_k\| = 1 \quad \forall\,k \in \{1, \dots, m\}$
+        \item $\|\myvec{p}_k\| = 1 \quad \forall\,k \in \{1, \dots, m\}$
     \end{itemize}
-    \paragraph{Note:} $\myset{W} \not\subset \mathbb{R}^n$
+    \paragraph{Note:} $\myset{P} \not\le \myvecsp{V}$
 
     
     \subsubsection{Orthogonal Complements}
     \paragraph{Orthogonal to a Set of Vectors}
     \begin{quote}
-        a vector $\myvec{z}$ is orthogonal to a vector space $\mysubvecsp{V}$ if \\
-        \[ \dotprod{\myvec{z}}{\myvec{v}} = 0 \quad \forall\,\myvec{v} \in \mysubvecsp{V} \]
+        a vector $\myvec{z}$ is orthogonal to a vector space $\mysubvecsp{U}$ if \\
+        \[ \dotprod{\myvec{z}}{\myvec{v}} = 0 \quad \forall\,\myvec{v} \in \mysubvecsp{U} \]
     \end{quote}
     
     \paragraph{Orthogonal Complement of a Set of Vectors} 
     
     \begin{quote}
-        The \textbf{orthogonal complement} of a vector space $\mysubvecsp{V}$ (denoted~by~$\mysubvecsp{V}^{\perp}$) is the set of \textbf{all}~vectors~$\myvec{z}$ that are orthogonal to $\mysubvecsp{V}$
+        The \textbf{orthogonal complement} of a vector space $\mysubvecsp{U}$ (denoted~by~$\mysubvecsp{U}^{\perp}$) is the set of \textbf{all}~vectors~$\myvec{z}$ that are orthogonal to $\mysubvecsp{U}$ \\
         \vspace{1ex}
         Note:
         \begin{itemize}
-            \item $\mysubvecsp{V}^{\perp} \subset \mathbb{R}^n$
-            \item any $\myvec{z} \in \mysubvecsp{V}^{\perp}$ is also orthogonal to $\operatorname{Span}(\mysubvecsp{V})$, $\implies \mysubvecsp{V}^{\perp} = (\operatorname{Span}(\mysubvecsp{V}))^{\perp}$
+            \item $\mysubvecsp{U}^{\perp} < \myvecsp{V}$
+            \item any $\myvec{z} \in \mysubvecsp{U}^{\perp}$ is also orthogonal to $\operatorname{Span}(\mysubvecsp{U})$, $\implies \mysubvecsp{U}^{\perp} = (\operatorname{Span}(\mysubvecsp{U}))^{\perp}$
         \end{itemize}
     \end{quote}
     
@@ -689,13 +714,13 @@
 
     The Gram-Schmidt Orthogonalization Process is a useful algorithmic procedure.
     \\
-    Take it briefly, given a set of basis vectors of any vector space $\mysubvecsp{V} \subseteq \mathbb{R}^n$,\\
-    \quad the process find a set of orthogonal (but not normalized) basis for $\mysubvecsp{V}$ \vspace{1ex}
+    Take it briefly, given a set of basis vectors of any vector space $\mysubvecsp{U} \le \myvecsp{V}$,\\
+    \quad the process find a set of orthogonal (but not normalized) basis for $\mysubvecsp{U}$ \vspace{1ex}
     
     It is as follows:
     \begin{quote}
-        Let $\{\myvec{w}_1, \myvec{w}_2, \dots, \myvec{w}_n\}$ be a basis for any vector space $\mysubvecsp{V} \subseteq \mathbb{R}^n$, then\\
-        the orthogonal basis $\{\myvec{v}_1, \myvec{v}_2, \dots, \myvec{v}_n\}$ for $\mysubvecsp{V}$ can be found as follows:
+        Let $\{\myvec{w}_1, \myvec{w}_2, \dots, \myvec{w}_n\}$ be a basis for any vector space $\mysubvecsp{U} \subseteq \mathbb{R}^n$, then\\
+        the orthogonal basis $\{\myvec{v}_1, \myvec{v}_2, \dots, \myvec{v}_n\}$ for $\mysubvecsp{U}$ can be found as follows:
     
         \begin{align*}
             \myvec{v}_1 &= \myvec{w}_1 \\
