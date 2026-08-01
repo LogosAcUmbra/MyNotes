@@ -1,0 +1,173 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{xcolor}
+\usepackage{bm}
+\usepackage{esvect}
+
+% \definecolor{myOrange}{HSL}{0.083, 1.0, 0.5}
+\definecolor{myParamColor}{Hsb}{15, 0.60, 0.76}
+
+% \newcommand{\mySetDef}[2]{\{\,#1\,\mid\,#2\,\}}
+\newcommand{\mySet}[1]{\mathcal{#1}}
+\DeclareRobustCommand{\myRandV}[1]{#1} % random variable
+\newcommand{\myPMF}[2]{p_{#1}\left(#2\right)}
+\newcommand{\myP}[1]{\operatorname{P}\left(#1\right)} % probability of
+\newcommand{\myExpect}[1]{\operatorname{E}\left(#1\right)} % expected value of
+\newcommand{\myVariance}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\myParam}[1]{\textcolor{myParamColor}{\bm{#1}}}
+\newcommand{\myVec}[1]{\vv{\mathbf{#1}}}
+\newcommand{\myTuple}[1]{\myVec{#1}}
+
+\title{Transformed Random Variables}
+\date{} % Leaves the date blank
+
+\begin{document}
+
+\maketitle
+
+\section{$X = X(\Omega)$}
+\subsection{PMF}
+\begin{equation*}
+\begin{aligned}
+    \myPMF{\myRandV{X}}{\myParam{x}} = \myP{\myRandV{X} = \myParam{x}} &= \myP{\{\myRandV{X} = \myParam{x}\}} \\
+    &= \myP{\{\omega \in \Omega \, \mid \, \myRandV{X}(\omega) = \myParam{x} \}}
+\end{aligned}
+\end{equation*}
+
+\subsection{Expected Value}
+\begin{equation*}
+\begin{aligned}
+    \myExpect{\myParam{\myRandV{X}}} &= \sum_{x \in \myParam{\myRandV{X}}} x \, \myPMF{\myParam{\myRandV{X}}}{x} \\
+\end{aligned}
+\end{equation*}
+
+
+\subsection{Variance}
+\begin{equation*}
+\begin{aligned}
+    \myVariance{\myParam{\myRandV{X}}} &= \myExpect{\,(\myParam{\myRandV{X}} - \myExpect{\myParam{\myRandV{X}}})^2 \,} \\
+    &= \myExpect{\myParam{\myRandV{X}}^2} - \myExpect{\;2\myExpect{\myParam{\myRandV{X}}}\cdot\myParam{\myRandV{X}} + (\myExpect{\myParam{\myRandV{X}}})^2\;} \\
+    &= \myExpect{\myParam{\myRandV{X}}^2} - 2\myExpect{\myParam{\myRandV{X}}}\cdot\myExpect{\myParam{\myRandV{X}}} + (\myExpect{\myParam{\myRandV{X}}})^2 \\
+    &= \myExpect{\myParam{\myRandV{X}}^2} - 2(\myExpect{\myParam{\myRandV{X}}})^2 + (\myExpect{\myParam{\myRandV{X}}})^2 \\
+    &= \myExpect{\myParam{\myRandV{X}}^2} - (\, \myExpect{\myParam{\myRandV{X}}}\, )^2 \\
+    &\quad = \myExpect{\myParam{\myRandV{X}}(\myParam{\myRandV{X}}-1)} - (\, \myExpect{\myParam{\myRandV{X}}}\, )^2 + \myExpect{\myRandV{X}}\\
+\end{aligned}
+\end{equation*}
+
+\newpage
+
+\section{$Y = Y(X) = Y(X(\Omega))$}
+\subsection{PMF}
+
+\begin{equation*}
+\begin{aligned}
+    \myPMF{\myRandV{Y}}{\myParam{y}} &= \myP{\{\myRandV{Y} = \myParam{y}\}} \\
+    &= \myP{\left\{\myRandV{Y}(\myRandV{X}) = \myParam{y}\right\}} \\
+    &= \myP{\left\{\, \omega \in \Omega \, \mid \, \myRandV{Y}(\myRandV{X}(\omega)) = \myParam{y}\right\}} \\
+    &= \myP{\left\{\, \omega \in \Omega \, \mid \, \myRandV{X}(\omega) \in \{\, x \in \myRandV{X}(\Omega) \mid \myRandV{Y}(x) = \myParam{y} \,\}\right\} \,} \\
+    &= \sum_{\left\{x \in \myRandV{X}(\Omega) \mid \myRandV{Y}(x) = \myParam{y}\right\}} \myP{\left\{\omega \in \Omega \mid \myRandV{X}(\omega) = x\right\} \,} \\
+    &= \sum_{\left\{x \mid \myRandV{Y}(x) = \myParam{y}\right\}} \myP{\{\myRandV{X} = x\}} \\
+    &= \sum_{\left\{x \mid \myRandV{Y}(x) = \myParam{y}\right\}} \myPMF{\myRandV{X}}{x} \\
+\end{aligned}
+\end{equation*}
+
+\subsection{Expected Value}
+
+\begin{equation*}
+\begin{aligned}
+    \myExpect{\myParam{\myRandV{Y}}} &= \sum_{y} y \, \myPMF{\myParam{\myRandV{Y}}}{y} & y \in \myParam{\myRandV{Y}}(\Omega) \\
+    &= \sum_{y} y \left(\sum_{\{x \mid \myParam{\myRandV{Y}}(x) = y\}} \myPMF{\myRandV{X}}{x}\right) \\
+    &= \sum_{y} \left(\sum_{\{x \mid \myParam{\myRandV{Y}}(x) = y\}} \myParam{\myRandV{Y}}(x) \, \myPMF{\myRandV{X}}{x}\right) \\
+    &= \sum_{x} \myParam{\myRandV{Y}}(x) \cdot \myPMF{X}{x} & x \in \myRandV{X}(\Omega) \\
+\end{aligned}
+\end{equation*}
+
+\newpage
+
+\section{$Y = Y(X_1, X_2) = Y(X_1(\Omega), X_2(\Omega))$}
+\subsection{PMF of $\myRandV{X_1}$ or $\myRandV{X_2}$}
+
+
+\begin{equation*}
+\begin{aligned}
+    \myPMF{\myRandV{X_1}}{\myParam{x}} &= \myP{\{\myRandV{X_1} = \myParam{x}\}} \\
+    &= \myP{\left\{\myRandV{X_1}(\myRandV{\omega}) = \myParam{x} \right\}} \\
+    &= \myP{\left\{\, \omega \in \Omega \, \mid \, \myRandV{X_1}(\omega) = \myParam{x}\right\}} \\
+    &= \myP{ \bigcup_{x_2 \in \myRandV{X_2}(\Omega)} \left\{\, \omega \in \Omega \, \mid \, \myRandV{X_1}(\omega) = \myParam{x} \, \land \, \myRandV{X_2}(\omega) = x_2 \right\}} \\
+    &= \sum_{x_2 \in \myRandV{X_2}(\Omega)} \myP{ \left\{\, \omega \in \Omega \, \mid \, \myRandV{X_1}(\omega) = \myParam{x} \, \land \, \myRandV{X_2}(\omega) = x_2 \right\}} \\
+    &= \sum_{x_2} \myP{ \left\{\, \myRandV{X_1} = \myParam{x}, \myRandV{X_2} = x_2 \right\}} \\
+    &= \sum_{x_2} \myPMF{\myRandV{X_1}, \myRandV{X_2}}{\myParam{x}, x_2}
+\end{aligned}
+\end{equation*}
+Similarly, \begin{equation*}
+    \myPMF{\myRandV{X_2}}{\myParam{x}} = \sum_{x_1} \myPMF{\myRandV{X_1}, \myRandV{X_2}}{x_1, x}
+\end{equation*}
+
+\subsection{PMF}
+
+\begin{equation*}
+\begin{aligned}
+    \myPMF{\myRandV{Y}}{\myParam{y}} &= \myP{\{\myRandV{Y} = \myParam{y}\}} \\
+    &= \myP{\left\{\myRandV{Y}(\myRandV{X_1}, \myRandV{X_2}) = \myParam{y}\right\}} \\
+    &= \myP{\left\{ ( \myRandV{X_1}, \myRandV{X_2} ) \in \left\{\, ( x_1, x_2) \in \myRandV{X_1}(\Omega) \times \myRandV{X_2}(\Omega) \, \mid \, \myRandV{Y}(x_1, x_2) = \myParam{y} \,\right\}\,\right\}} \\
+    &= \sum_{\left\{\, (x_1, x_2) \in \myRandV{X_1}(\Omega) \times \myRandV{X_2}(\Omega) \, \mid \, \myRandV{Y}(x_1, x_2) = \myParam{y} \,\right\}} \myP{\left\{\, (\myRandV{X_1}, \myRandV{X_2}) = (x_1, x_2) \,\right\}} \\
+    &= \sum_{\left\{\, (x_1, x_2) \in \myRandV{X_1}(\Omega) \times \myRandV{X_2}(\Omega) \, \mid \, \myRandV{Y}(x_1, x_2) = \myParam{y} \,\right\}} \myP{\left\{\, \myRandV{X_1} = x_1, \myRandV{X_2} = x_2 \,\right\}} \\
+    &= \sum_{\left\{\, (x_1, x_2) \, \mid \, \myRandV{Y}(x_1, x_2) = \myParam{y} \,\right\}} \myPMF{\myRandV{X_1}, \myRandV{X_2}}{x_1, x_2} \\
+\end{aligned}
+\end{equation*}
+
+\subsection{Expected Value}
+
+\begin{equation*}
+\begin{aligned}
+    \myExpect{\myParam{\myRandV{Y}}} &= \sum_{y} y \, \myPMF{\myParam{\myRandV{Y}}}{y} \\
+    &= \sum_{y} y \left(\sum_{\{ (x_1, x_2) \mid \myParam{\myRandV{Y}}(x_1, x_2) = y\}} \myPMF{\myRandV{X_1, X_2}}{x_1, x_2}\right) \\
+    &= \sum_{y} \left(\sum_{\{ (x_1, x_2) \mid \myParam{\myRandV{Y}}(x_1, x_2) = y\}} \myParam{\myRandV{Y}}(x_1, x_2) \, \myPMF{\myRandV{X_1, X_2}}{x_1, x_2}\right) \\
+    &= \sum_{(x_1, x_2)} \myParam{\myRandV{Y}}(x_1, x_2) \cdot \myPMF{X_1, X_2}{x_1, x_2}
+\end{aligned}
+\end{equation*}
+
+\newpage
+
+\section{$Y = Y(X_1, X_2, \dots, X_n)$}
+\subsection{PMF of $\myRandV{X_i}$}
+
+\begin{equation*}
+\begin{aligned}
+    \myPMF{\myRandV{X_i}}{\myParam{x}} &= \myP{\{\myRandV{X_i} = \myParam{x}\}} \\
+    &= \myP{\left\{ \bigcup_{\left\{\, (x_1, \dots, x_n) \in \myRandV{X_1}(\Omega) \times \dots \times \myRandV{X_n}(\Omega) \, \mid \, x_i = \myParam{x} \,\right\}} \left\{\, \myRandV{X_1} = x_1, \dots, \myRandV{X_n} = x_n \,\right\} \right\}} \\
+    &= \sum_{\left\{\, (x_1, \dots, x_n) \in \myRandV{X_1}(\Omega) \times \dots \times \myRandV{X_n}(\Omega) \, \mid \, x_i = \myParam{x} \,\right\}} \myP{\left\{\, \myRandV{X_1} = x_1, \dots, \myRandV{X_n} = x_n \,\right\}} \\
+    &= \sum_{\left\{\, (x_1, \dots, x_n) \, \mid \, x_i = \myParam{x} \,\right\}} \myPMF{\myRandV{X_1}, \dots, \myRandV{X_n}}{x_1, \dots, x_n}
+\end{aligned}
+\end{equation*}
+
+\subsection{PMF}
+
+\begin{equation*}
+\begin{aligned}
+\myPMF{\myRandV{Y}}{\myParam{y}} &= \myP{\{\myRandV{Y} = \myParam{y}\}} \\
+&= \myP{\left\{\myRandV{Y}(\myRandV{X_1}, \dots, \myRandV{X_n}) = \myParam{y}\right\}} \\
+&= \myP{\left\{ (\myRandV{X_1}, \dots, \myRandV{X_n}) \in \left\{\, (x_1, \dots, x_n) \in \myRandV{X_1}(\Omega) \times \dots \times \myRandV{X_n}(\Omega) \, \mid \, \myRandV{Y}(x_1, \dots, x_n) = \myParam{y} \,\right\}\,\right\}} \\
+&= \sum_{\left\{\, (x_1, \dots, x_n) \in \myRandV{X_1}(\Omega) \times \dots \times \myRandV{X_n}(\Omega) \, \mid \, \myRandV{Y}(x_1, \dots, x_n) = \myParam{y} \,\right\}} \myP{\left\{\, (\myRandV{X_1}, \dots, \myRandV{X_n}) = (x_1, \dots, x_n) \,\right\}} \\
+&= \sum_{\left\{\, (x_1, \dots, x_n) \in \myRandV{X_1}(\Omega) \times \dots \times \myRandV{X_n}(\Omega) \, \mid \, \myRandV{Y}(x_1, \dots, x_n) = \myParam{y} \,\right\}} \myP{\left\{\, \myRandV{X_1} = x_1, \dots, \myRandV{X_n} = x_n \,\right\}} \\
+&= \sum_{\left\{\, (x_1, \dots, x_n) \, \mid \, \myRandV{Y}(x_1, \dots, x_n) = \myParam{y} \,\right\}} \myPMF{\myRandV{X_1}, \dots, \myRandV{X_n}}{x_1, \dots, x_n} \\
+\end{aligned}
+\end{equation*}
+
+
+\subsection{Expected Value}
+
+\begin{equation*}
+\begin{aligned}
+    \myExpect{\myParam{\myRandV{Y}}} &= \sum_{y} y \, \myPMF{\myParam{\myRandV{Y}}}{y} \\
+    &= \sum_{y} y \left(\sum_{\{ (x_1, \dots, x_n) \mid \myParam{\myRandV{Y}}(x_1, \dots, x_n) = y\}} \myPMF{\myRandV{X_1}, \dots, \myRandV{X_n}}{x_1, \dots, x_n}\right) \\
+    &= \sum_{y} \left(\sum_{\{ (x_1, \dots, x_n) \mid \myParam{\myRandV{Y}}(x_1, \dots, x_n) = y\}} \myParam{\myRandV{Y}}(x_1, \dots, x_n) \, \myPMF{\myRandV{X_1}, \dots, \myRandV{X_n}}{x_1, \dots, x_n}\right) \\
+    &= \sum_{(x_1, \dots, x_n)} \myParam{\myRandV{Y}}(x_1, \dots, x_n) \cdot \myPMF{\myRandV{X_1}, \dots, \myRandV{X_n}}{x_1, \dots, x_n}
+\end{aligned}
+\end{equation*}
+
+
+\end{document}
