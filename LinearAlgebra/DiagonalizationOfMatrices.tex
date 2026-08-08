@@ -181,7 +181,7 @@
         \[ [\myvec{v}]_{\myset{B}} = \mymat{P}_{\myset{B}\leftarrow{S}} \myvec{v} \qquad \text{where } \mymat{P}_{\myset{B}\leftarrow{S}} = (\mymat{P}_{\myset{S}\leftarrow{B}})^{-1}\]
     \end{quote}
     Therefore, given a transition matrix $\mymat{P} = \mymat{P}_{\myset{S}\leftarrow\myset{B}}$ \\
-    for any linear transformation $\mymat{L} = [\mymat{L}]_{\myset{S}}$,\\ 
+    for all linear transformation $\mymat{L} = [\mymat{L}]_{\myset{S}}$,\\ 
     the equation to find $[\myvec{v}]_{\myset{B}}$ from $[\myvec{u}]_{\myset{B}}$:
     \begin{equation}
         [\myvec{v}]_{\myset{B}} = \mymat{P}^{-1} \mymat{L} \mymat{P} [\myvec{u}]_{\myset{B}}
@@ -283,7 +283,7 @@
             If we restrict our count to \textbf{distinct} and \textbf{real} eigenvalues:
             \begin{enumerate}
                 \item $\mymat{A}$ may have \textbf{no} real eigenvalues (the spectrum is purely complex).
-                \item The number of real eigenvalues $m$ ranges from $0 \le m \le n$.
+                \item The number of real eigenvalues $m$ is $0 \le m \le n$.
             \end{enumerate}
 
         \item \textbf{Dimension of Eigenspaces:} \vspace{1ex} \\
@@ -298,8 +298,8 @@
                 \begin{equation}
                     1 \le \dim \mysubvecsp{E}_{\lambda_k} \le (\text{Algebraic Multiplicity of } \lambda_k)
                 \end{equation}
-                \item \textbf{Total Dimension:} The sum of dimensions $\sum_{k=1}^m \dim \mysubvecsp{E}_{\lambda_k}$ ranges from $m$ to $n$.
-                \item \textbf{Full Coverage:} We have: total dimension $ = n$ if $m = n$. \\ 
+                \item \textbf{Total Dimension:} The sum of dimensions $\sum_{k=1}^m \dim \mysubvecsp{E}_{\lambda_k}$ is in range $[m, n]$.
+                \item \textbf{Special Case, All Real and Distinct:} We have: total dimension $ = n$ if $m = n$. \\ 
                     \begin{quote}
                         This implies that the direct sum of all $\mysubvecsp{E}_{\lambda}$ covers $\mathbb{R}^n$ when we have all $\lambda_k$ being distinct. \\
                         This explains why having all distinct real eigenvalues is a sufficient (but not necessary) condition for a square matrix to be \textbf{diagonalizable}, which we will cover in later chapters.
@@ -316,13 +316,13 @@
     \begin{align*}
         \mymat{A}\myvec{v} &= \lambda\myvec{v} \\
         \mymat{A}^{-1} \mymat{A} \myvec{v} &= \mymat{A}^{-1} (\lambda \myvec{v}) \\
-        \myvec{v} &= \lambda \mymat{A}^{-1} \myvec{v} & \mymat{L}(k\myvec{v}) = k\mymat{L}(\myvec{v}) \text{ for any lin. transf. function }\mymat{L}\\
+        \myvec{v} &= \lambda \mymat{A}^{-1} \myvec{v} & \mymat{L}(k\myvec{v}) = k\mymat{L}(\myvec{v}) \text{ for all lin. transf. function }\mymat{L}\\
         (1/\lambda)\myvec{v} &= \mymat{A}^{-1} \myvec{v}\\
         \lambda' &= 1/\lambda & \text{by definition of eigenvalue}
     \end{align*}
     \subsubsection{Product and Sum of Eigenvalues}
     \paragraph{The Determinant Property}~\\
-    for any $n \times n$ square matrix $\mymat{A}$ with eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_n$
+    for all $n \times n$ square matrix $\mymat{A}$ with eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_n$
     \begin{equation}
         \prod_{k=1}^{n} \lambda_k = \det \mymat{A}
     \end{equation}
@@ -337,7 +337,7 @@
     By Fundamental Theorem of Algebra, \\
     $ P(\lambda) = (-1)^n(\lambda - \lambda_1)(\lambda - \lambda_2)\dots(\lambda - \lambda_n)$ \vspace{1ex} \\
 
-    Since $P(\lambda) = \det(\mymat{A} - \lambda\mymat{I})$ for any $\lambda$, we can substitute $\lambda = 0$, \vspace{1ex} \\
+    Since $P(\lambda) = \det(\mymat{A} - \lambda\mymat{I})$ for all $\lambda$, we can substitute $\lambda = 0$, \vspace{1ex} \\
     $P(0) = \det\mymat{A}$ \vspace*{-\abovedisplayskip}
     \begin{flalign*}
         (-1)^n( - \lambda_1)( - \lambda_2)\dots( - \lambda_n) &= \det\mymat{A} &\\
@@ -348,7 +348,7 @@
     \newpage
     
     \paragraph{The Trace Property}~\\
-    for any $n \times n$ square matrix $\mymat{A}$ with eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_n$
+    for all $n \times n$ square matrix $\mymat{A}$ with eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_n$
     \begin{equation}
         \sum_{k=1}^{n} \lambda_k = \operatorname{tr}(\mymat{A})
     \end{equation}
@@ -413,7 +413,7 @@
     Under $\mathbb{R}^n$, using the basis $\myset{B} = \{ \myvec{b}_1, \myvec{b}_2, \dots, \myvec{b}_n \}$ \vspace{1ex}
 
     Let $\mymat{A}$ be a $m \times n$ matrix and $L$ be a linear transformation function such that
-    \[ \mymat{L}(\myvec{x}) = \mymat{A}\myvec{x} \qquad \text{ for any }n \times 1\text{ column vector }\myvec{x} \]
+    \[ \mymat{L}(\myvec{x}) = \mymat{A}\myvec{x} \qquad \text{ for all }n \times 1\text{ column vector }\myvec{x} \]
     
     The Matrix $\mymat{A}$ records $\mymat{L}$ by tracking how a set of vectors that equals to the basis vectors being transformed \textbf{relatively} to the basis vectors \\
     
@@ -444,13 +444,13 @@
         $[\mymat{L}(\myvec{e})]_\myset{E}$ means "how eigenvector changes in $\mymat{L}$, relative to themselves", so...
       
         \[ [\mymat{L}(\myvec{e}_k)]_\myset{E} = \lambda_k [\myvec{e}_k]_{\myset{E}} = \lambda_k\,\myvec{\mymat{I}_k} \qquad \text{ where $\myvec{\mymat{I}_k}$ is the k-th column of the Identity Matrix }\]
-        Therefore, 
-        \begin{equation*}
+        Therefore, we have
+        \begin{equation}
             \mymat{D} = [\mymat{A}]_{\myset{E}} = \Big[ [\mymat{L}(\myvec{e}_1)]_\myset{E}\,[\mymat{L}(\myvec{e}_2)]_\myset{E}\,\dots\,[\mymat{L}(\myvec{e}_n)]_\myset{E} \Big] = \Big[ \lambda_1\myvec{\mymat{I}_1}\,\lambda_2\myvec{\mymat{I}_2}\,\dots\,\lambda_n\myvec{\mymat{I}_n} \Big]
-        \end{equation*}
+        \end{equation}
         $\mymat{D}$ is called the diagonalized matrix of $\mymat{A}$, by recalling Change of Basis, we have
         \begin{equation}
-            \mymat{D} = \mymat{P}^{-1} \mymat{A} \mymat{P} \qquad \text{ where }\mymat{P} = \mymat{P}_{\myset{S}\leftarrow\myset{E}} = \Big[ \myvec{e}_1\,\myvec{e}_2\,\dots\,\myvec{e}_n \Big]
+            \mymat{P} = \mymat{P}_{\myset{S}\leftarrow\myset{E}} = \Big[ \myvec{e}_1\,\myvec{e}_2\,\dots\,\myvec{e}_n \Big] \qquad \text{ where }\mymat{P}\text{ suits }\mymat{D} = \mymat{P}^{-1} \mymat{A} \mymat{P}
         \end{equation}
     \end{minipage}
     
@@ -489,7 +489,7 @@
         &= \mymat{P} \mymat{D} (\mymat{P}^{-1}\mymat{P}) \mymat{D} (\mymat{P}^{-1} \dots \mymat{P})\mymat{D}\mymat{P}^{-1} \\
         &= \mymat{P} \mymat{D}^m \mymat{P}^{-1}
     \end{align*}
-    $\because$ for any diagonal matrix $\mymat{D} = \begin{bmatrix}
+    $\because$ for all diagonal matrix $\mymat{D} = \begin{bmatrix}
             d_{11}  & 0         & \dots     & 0 \\
             0       & d_{22}    & \dots     & 0 \\
             \vdots  & \vdots    & \ddots    & \vdots \\
@@ -544,7 +544,7 @@
     \newpage
     \subsubsection{Matrices with Orthonormal Column} \label{section3_5_3}
     A $m \times n$ matrix with orthonormal columns implies that \\
-    by taking the columns as column vectors, all the column vectors forms an orthogonal set
+    by taking the columns as column vectors, all the column vectors forms an orthonormal set
     
     \paragraph{$\bm{\mymat{U}^T \mymat{U} = \mymat{I}}$ :}\mbox{}\vspace{1ex}
 
@@ -658,11 +658,12 @@
     \begin{minipage}{\textwidth}
         1. orthogonally diagonalizable matrix $\iff$ \textbf{symmetric} matrix ($\mymat{A}^T = \mymat{A}$)
         \begin{quote}
-            
+            TODO
         \end{quote}
     \end{minipage} 
     \vspace{2ex}
-
+    
+    \noindent
     \begin{minipage}{\textwidth}
         2. all eigenvalues of a real symmetrix matrix $\mymat{A}$ are \textbf{real}
         \begin{quote}
@@ -680,6 +681,15 @@
                 \Aboxed{\lambda_k &\in \mathbb{R}}
             \end{align*}
         \end{quote}    
+    \end{minipage} 
+    \vspace{2ex}
+
+    \noindent
+    \begin{minipage}{\textwidth}
+        3. for each eigenvalue $\lambda_k$, geometric multiplicity = algebraic multiplicity
+        \begin{quote}
+            TODO
+        \end{quote}
     \end{minipage} 
     \vspace{2ex}
 
